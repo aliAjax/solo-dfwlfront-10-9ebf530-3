@@ -11,88 +11,191 @@ body {
   min-width: 320px;
 }
 
-button, input, select, textarea {
-  font: inherit;
-}
-
-button {
-  border: 0;
-  border-radius: 8px;
-  padding: 10px 14px;
-  background: #176b87;
-  color: #fff;
-  cursor: pointer;
-}
-
-button.secondary { background: #e8eef5; color: #172033; }
-button.danger { background: #c84b31; }
-button:disabled { opacity: .55; cursor: not-allowed; }
-
 .app {
   min-height: 100vh;
   padding: 28px;
 }
 
 .shell {
-  max-width: 1180px;
+  max-width: 1440px;
   margin: 0 auto;
+  display: grid;
+  gap: 18px;
 }
 
+/* ---------- 头部 ---------- */
+
 .topbar {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 24px;
-  align-items: end;
-  margin-bottom: 22px;
+  background: linear-gradient(120deg, #0f3d54, #176b87 60%, #2c8a9c);
+  border-radius: 12px;
+  padding: 26px 28px;
+  color: #fff;
 }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #176b87;
   font-weight: 700;
+  color: #9fd8e3;
+  letter-spacing: 0.04em;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(28px, 4vw, 44px);
-  letter-spacing: 0;
+  font-size: clamp(26px, 3.4vw, 38px);
 }
 
 .subtitle {
   margin: 10px 0 0;
-  max-width: 720px;
-  color: #5b667a;
+  max-width: 860px;
+  color: #d7e6ee;
   line-height: 1.7;
+  font-size: 14px;
 }
 
-.stack {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+/* ---------- 布局 ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) 1fr;
+  gap: 18px;
+  align-items: start;
 }
 
-.tag {
-  border-radius: 999px;
+.panel {
   background: #fff;
-  border: 1px solid #d9e2ee;
-  color: #445069;
-  padding: 7px 10px;
+  border: 1px solid #dfe7f1;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.panel h2 { margin: 0 0 14px; font-size: 19px; }
+.panel h3 { margin: 0 0 12px; font-size: 16px; }
+
+.config-panel {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-label {
   font-size: 13px;
+  font-weight: 600;
+  color: #445069;
+}
+
+.time-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-range .ant-picker { flex: 1; }
+
+.tilde { color: #69758c; }
+
+.hint {
+  margin: 0;
+  color: #69758c;
+  font-size: 13px;
+}
+
+.hint-inline {
+  color: #8a94a8;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* ---------- 到车量网格 ---------- */
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.slot-field {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #536078;
+}
+
+.slot-field .ant-input-number { width: 100%; }
+
+/* ---------- 故障时段 ---------- */
+
+.failure-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.failure-row .ant-picker { width: 92px; }
+
+/* ---------- 校验与运行 ---------- */
+
+.error-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.error-list li { margin: 2px 0; }
+
+.run-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- 结果区 ---------- */
+
+.results {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.empty-panel {
+  display: grid;
+  place-items: center;
+  min-height: 320px;
+}
+
+.stale {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(0.6);
 }
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
-  margin-bottom: 18px;
 }
 
 .metric {
   background: #fff;
   border: 1px solid #dfe7f1;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 10px;
+  padding: 14px 16px;
 }
 
 .metric span {
@@ -102,159 +205,255 @@ h1 {
 }
 
 .metric strong {
-  display: block;
-  margin-top: 8px;
+  display: inline-block;
+  margin-top: 6px;
   font-size: 30px;
+  line-height: 1.1;
+  color: #0f3d54;
 }
 
-.workspace {
-  display: grid;
-  grid-template-columns: minmax(280px, 360px) 1fr;
-  gap: 18px;
-}
-
-.panel, .list-panel {
-  background: #fff;
-  border: 1px solid #dfe7f1;
-  border-radius: 8px;
-  padding: 18px;
-}
-
-.panel h2, .list-panel h2 {
-  margin: 0 0 14px;
-  font-size: 20px;
-}
-
-.form-grid {
-  display: grid;
-  gap: 12px;
-}
-
-label {
-  display: grid;
-  gap: 6px;
-  color: #445069;
-  font-size: 14px;
-}
-
-input, select, textarea {
-  width: 100%;
-  border: 1px solid #cfd8e5;
-  border-radius: 8px;
-  padding: 10px 12px;
-  color: #172033;
-  background: #fbfcfe;
-}
-
-textarea {
-  min-height: 88px;
-  resize: vertical;
-}
-
-.toolbar {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.record-grid {
-  display: grid;
-  gap: 12px;
-}
-
-.record {
-  border: 1px solid #dfe7f1;
-  border-radius: 8px;
-  padding: 14px;
-  background: #fbfcfe;
-}
-
-.record-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: start;
-}
-
-.record-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.status {
-  border-radius: 999px;
-  padding: 6px 9px;
-  background: #e8f4ef;
-  color: #14724f;
+.metric em {
+  font-style: normal;
+  color: #8a94a8;
   font-size: 12px;
-  white-space: nowrap;
+  margin-left: 6px;
 }
 
-.details {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 14px;
-  margin: 12px 0;
-  color: #536078;
-  font-size: 14px;
-}
-
-.note {
+.meta-line {
+  margin: 0;
   color: #445069;
-  background: #eef5fb;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 0 0 12px;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.mini-chart {
-  display: grid;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.bar {
-  display: grid;
-  grid-template-columns: 92px 1fr 42px;
-  gap: 10px;
-  align-items: center;
-  color: #536078;
   font-size: 13px;
 }
 
-.bar-track {
+.meta-line code {
+  background: #eef5fb;
+  border-radius: 6px;
+  padding: 2px 6px;
+  color: #176b87;
+}
+
+/* ---------- 甘特时间轴 ---------- */
+
+.gantt { overflow-x: auto; }
+
+.gantt-axis {
+  position: relative;
+  height: 22px;
+  margin-left: 56px;
+  min-width: 640px;
+}
+
+.gantt-tick {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #8a94a8;
+  white-space: nowrap;
+}
+
+.gantt-body {
+  position: relative;
+  min-width: 640px;
+}
+
+.gantt-gridline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #eef2f7;
+}
+
+.gantt-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  height: 34px;
+}
+
+.gantt-label {
+  font-size: 12px;
+  color: #536078;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.gantt-track {
+  position: relative;
+  height: 22px;
+  background: #f6f9fc;
+  border-radius: 4px;
+}
+
+.gantt-car {
+  position: absolute;
+  top: 3px;
+  height: 16px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #2c8a9c, #176b87);
+  min-width: 3px;
+}
+
+.gantt-car:hover { background: #e8912d; }
+
+.gantt-failure {
+  position: absolute;
+  top: 0;
+  height: 22px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(200, 75, 49, 0.85),
+    rgba(200, 75, 49, 0.85) 6px,
+    rgba(244, 163, 146, 0.85) 6px,
+    rgba(244, 163, 146, 0.85) 12px
+  );
+}
+
+.gantt-legend {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #536078;
+}
+
+.gantt-legend i {
+  display: inline-block;
+  width: 14px;
   height: 10px;
-  border-radius: 999px;
-  background: #e7edf4;
-  overflow: hidden;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
-.bar-fill {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #176b87, #64b6ac);
+.legend-car { background: #176b87; }
+
+.legend-failure {
+  background: repeating-linear-gradient(-45deg, #c84b31, #c84b31 4px, #f4a392 4px, #f4a392 8px);
 }
 
-.empty {
-  text-align: center;
+.legend-note { color: #8a94a8; }
+
+/* ---------- 队列曲线 ---------- */
+
+.queue-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qc-grid { stroke: #eef2f7; stroke-width: 1; }
+
+.qc-ylabel, .qc-xlabel {
+  font-size: 11px;
+  fill: #8a94a8;
+}
+
+.qc-area { fill: rgba(23, 107, 135, 0.12); }
+
+.qc-line {
+  fill: none;
+  stroke: #176b87;
+  stroke-width: 2;
+}
+
+/* ---------- 方案对比 ---------- */
+
+.scenario-section { display: grid; gap: 14px; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-head h2 { margin: 0; }
+
+.scenario-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.scenario-card {
+  border: 1px solid #dfe7f1;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fbfcfe;
+  display: grid;
+  gap: 8px;
+}
+
+.scenario-name {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #0f3d54;
+  background: transparent;
+  width: 100%;
+}
+
+.scenario-name:hover, .scenario-name:focus {
+  border-color: #cfd8e5;
+  background: #fff;
+  outline: none;
+}
+
+.scenario-meta {
+  margin: 0;
+  font-size: 12px;
   color: #69758c;
-  padding: 32px 12px;
 }
 
-@media (max-width: 860px) {
-  .app { padding: 18px; }
-  .topbar, .workspace { grid-template-columns: 1fr; }
-  .stack { justify-content: flex-start; }
+.scenario-actions { display: flex; gap: 8px; }
+
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.compare th, .compare td {
+  border: 1px solid #e4ebf4;
+  padding: 9px 12px;
+  text-align: center;
+}
+
+.compare th {
+  background: #f2f7fb;
+  color: #0f3d54;
+}
+
+.compare td:first-child {
+  text-align: left;
+  color: #536078;
+  background: #fafcfe;
+}
+
+.compare td.best {
+  background: #e8f4ef;
+  color: #14724f;
+  font-weight: 700;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1080px) {
+  .layout { grid-template-columns: 1fr; }
+  .config-panel { position: static; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .scenario-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .app { padding: 14px; }
   .metrics { grid-template-columns: 1fr; }
-  .details { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .slots-grid { grid-template-columns: 1fr; }
 }
